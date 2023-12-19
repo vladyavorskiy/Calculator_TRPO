@@ -20,9 +20,9 @@ namespace newnewCalculator
 
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSingleton<IMemory, RAMMemory>();
+            //serviceCollection.AddSingleton<IMemory, RAMMemory>();
             //serviceCollection.AddSingleton<IMemory, FileMemory>();
-            //serviceCollection.AddSingleton<IMemory, BDMemory>();
+            serviceCollection.AddSingleton<IMemory, BDMemory>();
 
 
             serviceCollection.AddSingleton<MainViewModel>();

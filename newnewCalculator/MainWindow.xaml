@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:newnewCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500"
+        Title="MainWindow" Height="600" Width="700"
         d:DataContext="{d:DesignInstance {x:Type local:MainViewModel}}">
 
     <Window.Resources>
@@ -40,6 +40,7 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
 
+
     </Window.Resources>
 
 
@@ -60,7 +61,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0"
@@ -69,19 +70,36 @@
              ></TextBox>
 
         <ListBox Grid.Row="0" 
-                 Grid.RowSpan="7" 
-                 Grid.Column="4" 
-                 Name="memoryListBox" 
-                 FontSize="20"
-                 ItemsSource="{Binding MemoryList}"
-                 SelectedItem="{Binding Selected}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding}" 
-                                Command="{Binding DataContext.SelectMemoryItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
-                                CommandParameter="{Binding}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+        Grid.RowSpan="7" 
+        Grid.Column="4" 
+        Name="memoryListBox" 
+        FontSize="20"
+        ItemsSource="{Binding MemoryList}"
+        SelectedItem="{Binding Selected}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding}" 
+                Command="{Binding DataContext.SelectMemoryItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
+                CommandParameter="{Binding}" 
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalContentAlignment="Stretch"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
 

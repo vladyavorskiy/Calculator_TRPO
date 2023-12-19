@@ -17,9 +17,12 @@ namespace newnewCalculator
 {
     public interface IMemory
     {
+        void Put(string expression);
         void PutP(string expression);
         void PutM(string expression);
         string GetExpressions(string expression);
+        string GetAllExpressions(string expression);
+
         void Delete();
     }
 
@@ -100,6 +103,15 @@ namespace newnewCalculator
             _memory = "";
         }
 
+        public void Put(string expression)
+        {
+        }
+
+        public string GetAllExpressions(string expression)
+        {
+            return string.Empty;
+        }
+
     }
 
 
@@ -110,7 +122,7 @@ namespace newnewCalculator
         private string _filePath = "C:\\Users\\Vladislav Yavorskiy\\Desktop\\ТРПО\\newnewTestCalculator\\newnewCalculator\\memoryFileBD.txt";
         bool IsVisible = false;
 
-        public void PutP(string expression)
+        public void Put(string expression)
         {
             File.AppendAllLines(_filePath, new[] { expression });
         }
@@ -120,7 +132,18 @@ namespace newnewCalculator
             // Implement if necessary
         }
 
+        public void PutP(string expression)
+        {
+            // Implement if necessary
+        }
+
         public string GetExpressions(string expression)
+        {
+            return expression;
+        }
+
+
+        public string GetAllExpressions(string expression)
         {
             if (IsVisible == false)
             {
@@ -130,12 +153,12 @@ namespace newnewCalculator
                     string[] expressions = File.ReadAllLines(_filePath);
                     return string.Join(Environment.NewLine, expressions);
                 }
-                return "";
+                return string.Empty;
             }
             else
             {
                 IsVisible = false;
-                return "";
+                return string.Empty;
             }
 
         }
@@ -162,7 +185,7 @@ namespace newnewCalculator
         bool IsVisible = false;
 
 
-        public void PutP(string expression)
+        public void Put(string expression)
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -188,7 +211,17 @@ namespace newnewCalculator
         {
             
         }
+        public void PutP(string expression)
+        {
+
+        }
+
         public string GetExpressions(string expression)
+        {
+            return expression;
+        }
+
+        public string GetAllExpressions(string expression)
         {
             List<string> expressions = new List<string>();
 
@@ -218,7 +251,7 @@ namespace newnewCalculator
             else
             {
                 IsVisible = false;
-                return "";
+                return string.Empty;
             }
             
         }

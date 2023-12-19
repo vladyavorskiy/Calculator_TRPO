@@ -54,6 +54,11 @@ namespace newnewCalculator
             ReadMemoryCommand = new RelayCommand<string>(x =>
             {
                 Result = _memory.GetExpressions(Result);
+
+                MemoryList.Clear();
+                var expressions = _memory.GetAllExpressions(null);
+                MemoryList = new ObservableCollection<string>(expressions.Split('\n').Select(expression => expression.Trim()));
+
             });
 
             CleanMemoryCommand = new RelayCommand<string>(x =>
@@ -61,26 +66,6 @@ namespace newnewCalculator
                 _memory.Delete();
             });
 
-
-            //AddPlusToMemoryCommand = new RelayCommand<string>(x =>
-            //{
-            //});
-
-            //AddMinusToMemoryCommand = new RelayCommand<string>(x =>
-            //{
-            //});
-
-            //ReadMemoryCommand = new RelayCommand<string>(_ =>
-            //{
-            //    MemoryList.Clear();
-            //    var expressions = _memory.GetExpressions(null);
-            //    MemoryList = new ObservableCollection<string>(expressions.Split('\n').Select(expression => expression.Trim()));
-            //});
-
-            //CleanMemoryCommand = new RelayCommand<string>(x =>
-            //{
-            //    _memory.Delete();
-            //});
 
 
             NumberButtonCommand = new RelayCommand<string>(x =>
@@ -137,8 +122,8 @@ namespace newnewCalculator
 
             EqualsButtonCommand = new RelayCommand<string>(x =>
             {
-                Result = Result + " = " + _calculator.Calculate(Result);
-                //_memory.PutP(Result);
+                Result = Result + "=" + _calculator.Calculate(Result);
+                _memory.Put(Result);
             }, x => (string.IsNullOrWhiteSpace(Result) || Result.IndexOf("=") != -1 || _errors.Count > 0) == false);
 
 

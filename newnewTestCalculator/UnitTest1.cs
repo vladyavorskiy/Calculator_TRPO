@@ -175,6 +175,8 @@ namespace newnewTestCalculator
             {
                 if (symbol == ',' || symbol == '.')
                 {
+                    if(flag == false)
+                        throw new Exception("Expression error");
                     flag = false;
                     GetSymbol();
                     //x += ',';
